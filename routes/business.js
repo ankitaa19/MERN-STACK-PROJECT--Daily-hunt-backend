@@ -14,13 +14,14 @@ router.get('/', async (req, res) => {
 
 // Create a new business news entry
 router.post('/', async (req, res) => {
-    const { title, description, publishedAt, category } = req.body;
+    const { title, description, publishedAt, category, imgUrl } = req.body; // Include imgUrl here
 
     const business = new Business({
         title,
         description,
         publishedAt,
         category,
+        imgUrl, // Add imgUrl to the document
     });
 
     try {

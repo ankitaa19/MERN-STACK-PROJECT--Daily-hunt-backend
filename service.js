@@ -13,10 +13,8 @@ const sportsRouter = require('./routes/sports');
 const technologyRouter = require('./routes/technology');
 const entertainmentRouter = require('./routes/entertainment');
 const educationRouter = require('./routes/education');
-const crimesRouter = require('./routes/crime.js'); // Ensure this is correct
-
-
-
+const crimesRouter = require('./routes/crime'); // Ensure this is correct
+const loginRouter = require('./routes/login'); // Include your login route
 
 // Initialize Express app
 const app = express();
@@ -27,7 +25,10 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
@@ -39,7 +40,7 @@ app.use('/api/technology', technologyRouter);
 app.use('/api/entertainment', entertainmentRouter);
 app.use('/api/education', educationRouter);
 app.use('/api/crimes', crimesRouter);
-
+app.use('/api/login', loginRouter); // Add the login route
 
 // 404 Error Handling
 app.use((req, res, next) => {

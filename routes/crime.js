@@ -14,13 +14,13 @@ router.get('/', async (req, res) => {
 
 // Create a new crime news entry
 router.post('/', async (req, res) => {
-    const { title, description, publishedAt, url } = req.body; // Added URL to destructure
+    const { title, description, publishedAt, imgurl } = req.body; // Use imgurl instead of url
 
     const crime = new Crime({
         title,
         description,
         publishedAt,
-        url, // Use the destructured URL
+        imgurl, // Correctly using imgurl here
     });
 
     try {
